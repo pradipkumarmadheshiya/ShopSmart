@@ -1,4 +1,4 @@
-const products=[
+const productsList=[
     {
         id: 1,
         name: 'Premium Wireless Headphones',
@@ -222,3 +222,70 @@ const products=[
         seller: 'SportsMaster'
       }
 ]
+
+const categoriesList=[
+  { id: 1, name: 'Electronics', icon: '💻', url: '/category/electronics' },
+  { id: 2, name: 'Fashion', icon: '👕', url: '/category/fashion' },
+  { id: 3, name: 'Home & Kitchen', icon: '🏠', url: '/category/home-kitchen' },
+  { id: 4, name: 'Beauty', icon: '💄', url: '/category/beauty' },
+  { id: 5, name: 'Toys & Games', icon: '🧸', url: '/category/toys-games' },
+  { id: 6, name: 'Sports', icon: '⚽', url: '/category/sports' },
+  { id: 7, name: 'Books', icon: '📚', url: '/category/books' },
+  { id: 8, name: 'Grocery', icon: '🍎', url: '/category/grocery' }
+]
+
+const userOrdersData=[
+  {
+    id: 'ORD123456789',
+    date: '2025-05-01',
+    status: 'Delivered',
+    total: 239.98,
+    items: [
+      {
+        productId: 1,
+        name: 'Premium Wireless Headphones',
+        price: 199.99,
+        quantity: 1,
+        image: '/api/placeholder/100/100'
+      },
+      {
+        productId: 6,
+        name: 'Vitamin C Serum',
+        price: 24.99,
+        quantity: 1,
+        image: '/api/placeholder/100/100'
+      }
+    ],
+    address: {
+      name: 'John Doe',
+      address: '123 Main Street',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10001'
+    }
+  },
+  {
+    id: 'ORD987654321',
+    date: '2025-04-15',
+    status: 'In Transit',
+    total: 899.99,
+    items: [
+      {
+        productId: 2,
+        name: 'Smartphone Pro Max',
+        price: 899.99,
+        quantity: 1,
+        image: '/api/placeholder/100/100'
+      }
+    ],
+    address: {
+      name: 'John Doe',
+      address: '123 Main Street',
+      city: 'New York',
+      state: 'NY',
+      zipCode: '10001'
+    }
+  }
+]
+
+export {productsList, categoriesList, userOrdersData}
