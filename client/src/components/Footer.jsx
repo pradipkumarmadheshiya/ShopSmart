@@ -1,5 +1,4 @@
-import { Facebook, Linkedin } from 'lucide-react'
-import React from 'react'
+import { Facebook, Linkedin, Twitter, Youtube } from 'lucide-react'
 
 const Footer = () => {
   return (
@@ -43,18 +42,18 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
               <div className="flex space-x-4 mb-4">
-                <a href='' className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
-                    
-                </a>
-                <a href='' className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
-
-                </a>
-                <a href='' className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
-
-                </a>
-                <a href='' className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
-
-                </a>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
+                    <Facebook/>
+                </div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
+                    <Twitter/>
+                </div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
+                    <Linkedin/>
+                </div>
+                <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-800 cursor-pointer">
+                    <Youtube/>
+                </div>
               </div>
               
               <h3 className="text-lg font-bold mb-2">Newsletter</h3>

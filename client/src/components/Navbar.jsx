@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
 import {X, Menu, Search, User, ShoppingCart} from "lucide-react"
+import { assets } from '../assets/assets'
 
 const Navbar = () => {
 
@@ -118,7 +119,7 @@ const Navbar = () => {
               {
                 isMenuOpen && (
                   <div onClick={()=>setIsMenuOpen(false)}
-                  className='fixed inset-0 bg-gray-200 z-50 md:hidden'>
+                  className='fixed inset-0 bg-gray-50 z-60 md:hidden'>
                     <div onClick={(e)=>e.stopPropagation()}
                     className='bg-white h-full w-4/5 max-w-xs overflow-y-auto'>
                       <div className='p-4 border-b flex items-center justify-between'>
@@ -134,7 +135,7 @@ const Navbar = () => {
                         {
                           isLoggedIn ? (
                             <div 
-                              className="p-3 flex items-center border-b border-gray-300 cursor-pointer"
+                              className="p-3 flex items-center border-b border-gray-300 cursor-pointer hover:bg-gray-100"
                               onClick={() => {
                                 navigateTo('account');
                                 setIsMenuOpen(false);
@@ -145,7 +146,7 @@ const Navbar = () => {
                             </div>
                             ) : (
                             <div 
-                              className="p-3 flex items-center border-b border-gray-300 cursor-pointer"
+                              className="p-3 flex items-center border-b border-gray-300 cursor-pointer hover:bg-gray-100"
                               onClick={() => {
                                 setShowLoginModal(true);
                                 setIsMenuOpen(false);
@@ -159,10 +160,9 @@ const Navbar = () => {
                           {categories.map(category => (
                             <div 
                               key={category.id}
-                              className="p-3 flex items-center border-b border-gray-200"
+                              className="p-3 flex items-center text-gray-700 border-b border-gray-200 cursor-pointer hover:bg-gray-100"
                               onClick={() => handleCategoryClick(category.name)}
                             >
-                              <span className="mr-3">{category.icon}</span>
                               {category.name}
                             </div>
                           ))}
@@ -173,7 +173,7 @@ const Navbar = () => {
               }
 
               <button onClick={()=>setIsMenuOpen(!isMenuOpen)}
-                  className='sm:hidden cursor-pointer hover:bg-gray-200 rounded hover:p-1'>
+                  className='sm:hidden cursor-pointer hover:bg-gray-200 rounded'>
                   {
                       isMenuOpen? <X/> : <Menu/>
                   }

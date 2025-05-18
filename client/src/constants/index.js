@@ -1,3 +1,5 @@
+import { assets } from "../assets/assets";
+
 const productsList=[
     {
         id: 1,
@@ -9,12 +11,12 @@ const productsList=[
         reviewCount: 256,
         category: 'Electronics',
         brand: 'SoundMaster',
-        image: '/api/placeholder/400/400',
+        image: assets.headphone,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.headphone,
+          assets.headphone,
+          assets.headphone,
+          assets.headphone
         ],
         discount: 20,
         bestseller: true,
@@ -38,11 +40,11 @@ const productsList=[
         reviewCount: 478,
         category: 'Electronics',
         brand: 'TechGiant',
-        image: '/api/placeholder/400/400',
+        image: assets.smartphone,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.smartphone,
+          assets.smartphone,
+          assets.smartphone
         ],
         discount: 10,
         bestseller: true,
@@ -58,19 +60,19 @@ const productsList=[
       },
       {
         id: 3,
-        name: 'Men\'s Classic Fit Shirt',
-        description: 'Comfortable classic fit shirt for formal and casual occasions.',
+        name: 'Men\'s Classic Fit TShirt',
+        description: 'Comfortable classic fit Tshirt for formal and casual occasions.',
         price: 39.99,
         originalPrice: 54.99,
-        rating: 4.3,
+        rating: 3,
         reviewCount: 189,
         category: 'Fashion',
         brand: 'StyleMaster',
-        image: '/api/placeholder/400/400',
+        image: assets.tshirt,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.tshirt,
+          assets.tshirt,
+          assets.tshirt
         ],
         discount: 27,
         bestseller: false,
@@ -94,11 +96,11 @@ const productsList=[
         reviewCount: 312,
         category: 'Electronics',
         brand: 'FitTech',
-        image: '/api/placeholder/400/400',
+        image: assets.watch,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.watch,
+          assets.watch,
+          assets.watch
         ],
         discount: 25,
         bestseller: true,
@@ -118,15 +120,15 @@ const productsList=[
         description: 'Complete cookware set with durable non-stick coating for healthy cooking.',
         price: 79.99,
         originalPrice: 129.99,
-        rating: 4.6,
+        rating: 3.9,
         reviewCount: 201,
         category: 'Home & Kitchen',
         brand: 'KitchenPro',
-        image: '/api/placeholder/400/400',
+        image: assets.cookware,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.cookware,
+          assets.cookware,
+          assets.cookware
         ],
         discount: 38,
         bestseller: false,
@@ -146,14 +148,14 @@ const productsList=[
         description: 'Brightening face serum with antioxidants for radiant skin.',
         price: 24.99,
         originalPrice: 34.99,
-        rating: 4.8,
+        rating: 2,
         reviewCount: 325,
         category: 'Beauty',
         brand: 'GlowUp',
-        image: '/api/placeholder/400/400',
+        image: assets.vitaminC,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.vitaminC,
+          assets.vitaminC
         ],
         discount: 28,
         bestseller: true,
@@ -175,11 +177,11 @@ const productsList=[
         reviewCount: 178,
         category: 'Electronics',
         brand: 'SoundMaster',
-        image: '/api/placeholder/400/400',
+        image: assets.speaker,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.speaker,
+          assets.speaker,
+          assets.speaker
         ],
         discount: 25,
         bestseller: false,
@@ -199,15 +201,15 @@ const productsList=[
         description: 'Lightweight and comfortable shoes for running and daily workouts.',
         price: 89.99,
         originalPrice: 109.99,
-        rating: 4.5,
+        rating: 3.5,
         reviewCount: 235,
         category: 'Sports',
         brand: 'SportFlex',
-        image: '/api/placeholder/400/400',
+        image: assets.shoes,
         images: [
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800',
-          '/api/placeholder/800/800'
+          assets.shoes,
+          assets.shoes,
+          assets.shoes
         ],
         discount: 18,
         bestseller: true,
@@ -220,18 +222,228 @@ const productsList=[
         colors: ['Black/White', 'Blue/Gray', 'Red/Black'],
         sizes: ['7', '8', '9', '10', '11', '12'],
         seller: 'SportsMaster'
+      },
+      {
+        id: 9,
+        name: 'Laptop',
+        description: 'HP 15, 13th Gen Intel Core i5-1334U Laptop(16GB DDR4, 512GB SSD)',
+        price: 1199.99,
+        originalPrice: 1249.99,
+        rating: 4.5,
+        reviewCount: 256,
+        category: 'Electronics',
+        brand: 'HP',
+        image: assets.laptop,
+        images: [
+          assets.laptop,
+          assets.laptop,
+          assets.laptop,
+          assets.laptop
+        ],
+        discount: 20,
+        bestseller: true,
+        availability: true,
+        specifications: [
+          { name: 'Battery Life', value: '3 hours' },
+          { name: 'Connectivity', value: 'Bluetooth 5.0' },
+          { name: 'Weight', value: '5kg' },
+          { name: 'Front Camera', value: '10 mp' }
+        ],
+        colors: ['Black', 'White', 'Blue'],
+        seller: 'ElectroWorld'
+      },
+      {
+        id: 10,
+        name: 'Smartphone 13 Pro ',
+        description: 'Latest smartphone with high-resolution camera and powerful processor.',
+        price: 999.99,
+        originalPrice: 1199.99,
+        rating: 4.7,
+        reviewCount: 478,
+        category: 'Electronics',
+        brand: 'TechGiant',
+        image: assets.iphone,
+        images: [
+          assets.iphone,
+          assets.iphone,
+          assets.iphone
+        ],
+        discount: 10,
+        bestseller: true,
+        availability: true,
+        specifications: [
+          { name: 'Display', value: '6.7" OLED' },
+          { name: 'Processor', value: 'Octa-core' },
+          { name: 'Storage', value: '256GB' },
+          { name: 'Camera', value: '48MP Triple' }
+        ],
+        colors: ['Midnight Black', 'Silver', 'gray'],
+        seller: 'Mobile Hub'
+      },
+      {
+        id: 11,
+        name: 'Men\'s Classic Fit Shirt',
+        description: 'Comfortable classic fit shirt for formal and casual occasions.',
+        price: 49.99,
+        originalPrice: 64.99,
+        rating: 2.5,
+        reviewCount: 185,
+        category: 'Fashion',
+        brand: 'StyleMaster',
+        image: assets.shirt,
+        images: [
+          assets.shirt,
+          assets.shirt,
+          assets.shirt
+        ],
+        discount: 27,
+        bestseller: false,
+        availability: true,
+        specifications: [
+          { name: 'Material', value: '100% Cotton' },
+          { name: 'Fit', value: 'Classic' },
+          { name: 'Care', value: 'Machine Wash' }
+        ],
+        colors: ['White', 'Blue', 'Black', 'Pink'],
+        sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+        seller: 'FashionHub'
+      },
+      {
+        id: 12,
+        name: 'Sliding toy',
+        description: 'Sliding toy for children',
+        price: 249.99,
+        originalPrice: 299.99,
+        rating: 4.4,
+        reviewCount: 310,
+        category: 'Toys',
+        brand: 'Toyz',
+        image: assets.sliding_toy,
+        images: [
+          assets.sliding_toy,
+          assets.sliding_toy,
+          assets.sliding_toy
+        ],
+        discount: 25,
+        bestseller: true,
+        availability: true,
+        specifications: [
+          { name: 'Material', value: 'Solid Plastic' },
+        ],
+        colors: ['Black', 'Silver', 'Rose Gold'],
+        seller: 'ToysZone'
+      },
+      {
+        id: 13,
+        name: 'Dumbles',
+        description: 'Rubber Encased Hex Dumbbell Weight Set Of 2',
+        price: 89.99,
+        originalPrice: 139.99,
+        rating: 3.5,
+        reviewCount: 201,
+        category: 'sport',
+        brand: 'sportos',
+        image: assets.dumbles,
+        images: [
+          assets.dumbles,
+          assets.dumbles,
+          assets.dumbles
+        ],
+        discount: 35,
+        bestseller: false,
+        availability: true,
+        specifications: [
+          { name: 'Pieces', value: '2' },
+          { name: 'Material', value: 'Steel with rubber' },
+          { name: 'Safe', value: 'Yes' },
+        ],
+        colors: ['Black', 'Red'],
+        seller: 'Sportiers'
+      },
+      {
+        id: 14,
+        name: 'Olay Retinol night secum',
+        description: 'Brightening face serum with antioxidants for radiant skin.',
+        price: 34.99,
+        originalPrice: 44.99,
+        rating: 1,
+        reviewCount: 320,
+        category: 'Beauty',
+        brand: 'GlowUp',
+        image: assets.olay,
+        images: [
+          assets.olay,
+          assets.olay
+        ],
+        discount: 23,
+        bestseller: true,
+        availability: true,
+        specifications: [
+          { name: 'Size', value: '35ml' },
+          { name: 'Key Ingredients', value: 'Vitamin C, Hyaluronic Acid, Vitamin E' },
+          { name: 'Skin Type', value: 'All Skin Types' }
+        ],
+        seller: 'BeautyWorld'
+      },
+      {
+        id: 15,
+        name: 'Books',
+        description: 'Mind Changing books',
+        price: 69.99,
+        originalPrice: 89.99,
+        rating: 4.2,
+        reviewCount: 170,
+        category: 'books',
+        brand: 'bookster',
+        image: assets.books2,
+        images: [
+          assets.books2,
+          assets.books2,
+          assets.books2
+        ],
+        discount: 25,
+        bestseller: false,
+        availability: true,
+        specifications: [
+          { name: 'Pages', value: 'Soft' },
+        ],
+        seller: 'BooksWorld'
+      },
+      {
+        id: 16,
+        name: 'Atta',
+        description: 'Sugar free Atta',
+        price: 99.99,
+        originalPrice: 119.99,
+        rating: 4,
+        reviewCount: 230,
+        category: 'grocery',
+        brand: 'groceryverce',
+        image: assets.atta,
+        images: [
+          assets.atta,
+          assets.atta,
+          assets.atta
+        ],
+        discount: 16,
+        bestseller: true,
+        availability: true,
+        specifications: [
+          { name: 'Material', value: 'wheat' },
+        ],
+        seller: 'Groceryworld'
       }
 ]
 
 const categoriesList=[
-  { id: 1, name: 'Electronics', icon: '💻', url: '/category/electronics' },
-  { id: 2, name: 'Fashion', icon: '👕', url: '/category/fashion' },
-  { id: 3, name: 'Home & Kitchen', icon: '🏠', url: '/category/home-kitchen' },
-  { id: 4, name: 'Beauty', icon: '💄', url: '/category/beauty' },
-  { id: 5, name: 'Toys & Games', icon: '🧸', url: '/category/toys-games' },
-  { id: 6, name: 'Sports', icon: '⚽', url: '/category/sports' },
-  { id: 7, name: 'Books', icon: '📚', url: '/category/books' },
-  { id: 8, name: 'Grocery', icon: '🍎', url: '/category/grocery' }
+  { id: 1, name: 'Electronics', icon: assets.laptop, url: '/category/electronics' },
+  { id: 2, name: 'Fashion', icon: assets.tshirt, url: '/category/fashion' },
+  { id: 3, name: 'Home & Kitchen', icon: assets.home_kitchen, url: '/category/home-kitchen' },
+  { id: 4, name: 'Beauty', icon: assets.lipstick, url: '/category/beauty' },
+  { id: 5, name: 'Toys & Games', icon: assets.toys, url: '/category/toys-games' },
+  { id: 6, name: 'Sports', icon: assets.football, url: '/category/sports' },
+  { id: 7, name: 'Books', icon: assets.books, url: '/category/books' },
+  { id: 8, name: 'Grocery', icon: assets.grocery, url: '/category/grocery' }
 ]
 
 const userOrdersData=[
@@ -288,4 +500,34 @@ const userOrdersData=[
   }
 ]
 
-export {productsList, categoriesList, userOrdersData}
+const banners = [
+  {
+  id: 1,
+  title: "Summer Collection 2025",
+  description: "Get up to 50% off on all summer essentials",
+  bgColor: "bg-blue-100",
+  textColor: "text-blue-800",
+  btnColor: "bg-blue-600",
+  image: assets.summer_collections
+  },
+  {
+  id: 2,
+  title: "New Electronics Arrivals",
+  description: "Latest gadgets with exclusive launch offers",
+  bgColor: "bg-purple-100",
+  textColor: "text-purple-800",
+  btnColor: "bg-purple-600",
+  image: assets.electronics
+  },
+  {
+  id: 3,
+  title: "Home Decor Sale",
+  description: "Transform your space with premium decor",
+  bgColor: "bg-green-100",
+  textColor: "text-green-800",
+  btnColor: "bg-green-600",
+  image: assets.home_decore
+  }
+];
+
+export {productsList, categoriesList, userOrdersData, banners}
