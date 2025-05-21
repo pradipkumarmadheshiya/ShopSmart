@@ -23,6 +23,10 @@ import olay from "./olay.JPG"
 import sliding_toy from "./sliding_toy.JPG"
 import shirt from "./shirt.JPG"
 import iphone from "./iphone.JPG"
+import cookware2 from "./cookware2.png"
+import headphone2 from "./headphone2.JPG"
+import tshirt2 from "./tshirt2.png"
+import watch2 from "./watch2.jpg"
 
 export const assets={
     electronics,
@@ -49,5 +53,9 @@ export const assets={
     olay,
     sliding_toy,
     shirt,
-    iphone
+    iphone,
+    cookware2,
+    headphone2,
+    tshirt2,
+    watch2
 }

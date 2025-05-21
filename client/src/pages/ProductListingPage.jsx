@@ -1,75 +1,64 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useAppContext } from '../context/AppContext';
 import { Filter, Star, X } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import FilterSection from '../components/FilterSection';
+import toast from 'react-hot-toast';
 
 function ProductListingPage() {
 
   const {
-        products, setProducts, cartItems, setCartItems, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, category
+        products, cartItems, setCartItems, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, category,
     }=useAppContext()
 
   // Get all available filter options from products
   const allBrands = [...new Set(products.map(p => p.brand))];
-  const allColors = [...new Set(products.filter(p => p.color).map(p => p.color))];
-  const allSizes = [...new Set(products.filter(p => p.size).map(p => p.size))];
 
-  // Filter products based on the selected filters
-  useEffect(() => {
-    let filteredProducts = [...products];
+  // Filter and sort products based on the selected filters
+  const filteredProducts = useMemo(() => {
+    let filtered = [...products];
     
     // Price range filter
-    filteredProducts = filteredProducts.filter(
+    filtered = filtered.filter(
       p => p.price >= filters.priceRange.min && p.price <= filters.priceRange.max
     );
     
     // Brand filter
     if (filters.brands.length > 0) {
-      filteredProducts = filteredProducts.filter(p => filters.brands.includes(p.brand));
+      filtered = filtered.filter(p => filters.brands.includes(p.brand));
     }
     
     // Rating filter
     if (filters.ratings > 0) {
-      filteredProducts = filteredProducts.filter(p => p.rating >= filters.ratings);
-    }
-    
-    // Color filter
-    if (filters.colors.length > 0) {
-      filteredProducts = filteredProducts.filter(p => p.color && filters.colors.includes(p.color));
-    }
-    
-    // Size filter
-    if (filters.sizes.length > 0) {
-      filteredProducts = filteredProducts.filter(p => p.size && filters.sizes.includes(p.size));
+      filtered = filtered.filter(p => p.rating >= filters.ratings);
     }
     
     // Discount filter
     if (filters.discount) {
-      filteredProducts = filteredProducts.filter(p => 
-        ((p.originalPrice - p.price) / p.originalPrice) >= 0.1
+      filtered = filtered.filter(p => 
+        ((p.originalPrice - p.price) / p.originalPrice) >= 0.2
       );
     }
     
     // Apply sorting
     switch (sortOption) {
       case 'price-asc':
-        filteredProducts.sort((a, b) => a.price - b.price);
+        filtered.sort((a, b) => a.price - b.price);
         break;
       case 'price-desc':
-        filteredProducts.sort((a, b) => b.price - a.price);
+        filtered.sort((a, b) => b.price - a.price);
         break;
       case 'rating':
-        filteredProducts.sort((a, b) => b.rating - a.rating);
+        filtered.sort((a, b) => b.rating - a.rating);
         break;
       default:
         // Default 'featured' sorting - no specific sort
         break;
     }
     
-    setProducts(filteredProducts);
-  }, [filters, sortOption]);
+    return filtered;
+  }, [products, filters, sortOption]);
 
   // Handle filter changes
   const handleFilterChange = (filterType, value) => {
@@ -92,26 +81,26 @@ function ProductListingPage() {
   };
 
   // Handle add to cart
-  const addToCart = (product) => {
-    setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
-      if (existingItem) {
-        return prev.map(item => 
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        return [...prev, { ...product, quantity: 1 }];
-      }
-    });
-    alert(`Added ${product.name} to cart!`);
-  };
+  // const addToCart = (product) => {
+  //   setCartItems(prev => {
+  //     const existingItem = prev.find(item => item.id === product.id);
+  //     if (existingItem) {
+  //       return prev.map(item => 
+  //         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+  //       );
+  //     } else {
+  //       return [...prev, { ...product, quantity: 1 }];
+  //     }
+  //   });
+  //   toast.success(`Added ${product.name} to cart!`);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm py-4">
         <div className="container mx-auto px-4">
             <Link to="/" className="hover:text-gray-800 underline mb-2">Home</Link>
-            <p className="text-gray-600">{products.length} products found</p>
+            <p className="text-gray-600">{filteredProducts.length} products found</p>
         </div>
       </header>
 
@@ -132,7 +121,7 @@ function ProductListingPage() {
           {/* Mobile filter sidebar */}
           {mobileFiltersOpen && (
             <div className="fixed inset-0 z-40 lg:hidden">
-              <div className="fixed inset-0 bg-gray-100 bg-opacity-25" onClick={() => setMobileFiltersOpen(false)}></div>
+              <div className="fixed inset-0 bg-black/50" onClick={() => setMobileFiltersOpen(false)}></div>
               <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-white shadow-xl p-6 overflow-y-auto">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-medium">Filters</h2>
@@ -209,7 +198,7 @@ function ProductListingPage() {
                         onChange={() => handleFilterChange('discount', !filters.discount)}
                         className="mr-2"
                       />
-                      <label htmlFor="mobile-discount" className="text-sm">10% Off or more</label>
+                      <label htmlFor="mobile-discount" className="text-sm">20% Off or more</label>
                     </div>
                   </FilterSection>
                 </div>
@@ -287,7 +276,7 @@ function ProductListingPage() {
                     onChange={() => handleFilterChange('discount', !filters.discount)}
                     className="mr-2"
                   />
-                  <label htmlFor="discount" className="text-sm">10% Off or more</label>
+                  <label htmlFor="discount" className="text-sm">20% Off or more</label>
                 </div>
               </FilterSection>
             </div>
@@ -316,9 +305,9 @@ function ProductListingPage() {
             </div>
 
             {/* Product grid */}
-            {products.length > 0 ? (
+            {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product}/>
                 ))}
               </div>
@@ -330,11 +319,9 @@ function ProductListingPage() {
                     priceRange: { min: 0, max: 2500 },
                     brands: [],
                     ratings: 0,
-                    colors: [],
-                    sizes: [],
                     discount: false
                   })}
-                  className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                  className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 cursor-pointer"
                 >
                   Clear All Filters
                 </button>

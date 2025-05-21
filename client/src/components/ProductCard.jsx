@@ -1,14 +1,19 @@
 import { ShoppingCart } from 'lucide-react'
 import React from 'react'
+import { useAppContext } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
+
+    const {navigate}=useAppContext()
     
     return (
-        <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <div className='flex justify-center'>
-                <img src={product.image} alt={product.name} className="w-fit h-48 object-cover rounded" />
+        <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+        onClick={()=>{navigate(`/products/${product.id}`); window.scrollTo(0, 0)}}>
+            <div className='flex justify-center cursor-pointer'>
+                <img src={product.image} alt={product.name} className="w-fit h-48 object-cover rounded hover:scale-105 transition-transform duration-300" />
             </div>
-            <div className="p-4">
+            <div  onClick={(e)=>{e.stopPropagation()}}
+            className="p-4">
                 <h3 className="font-medium text-lg mb-1 truncate">{product.name}</h3>
                 <div className="flex items-center mb-2">
                 <div className="flex text-yellow-400">

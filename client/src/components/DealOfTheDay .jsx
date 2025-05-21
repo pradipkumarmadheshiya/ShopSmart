@@ -84,21 +84,10 @@ function DealOfTheDay() {
               Experience superior sound quality with our top-rated noise-cancelling headphones. Perfect for work, travel, or relaxation.
             </p>
             <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold">$149.99</span>
-              <span className="text-lg text-gray-500 line-through ml-2">$299.99</span>
+              <span className="text-2xl font-bold">$199.99</span>
+              <span className="text-lg text-gray-500 line-through ml-2">$249.99</span>
             </div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-green-50 text-gray-800 px-2 py-1 rounded text-sm">
-                <span className="font-bold">234</span> sold
-              </div>
-              <div className="h-2 flex-grow bg-gray-200 rounded-full overflow-hidden">
-                <div className="bg-gray-400 h-full w-2/3"></div>
-              </div>
-              <div className="text-sm text-gray-600">
-                <span className="font-bold">48</span> remaining
-              </div>
-            </div>
-            <button className="bg-gray-900 hover:bg-black text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center">
+            <button className="bg-gray-900 hover:bg-black text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center cursor-pointer">
               <ShoppingCart size={20} className="mr-2" />
               Add to Cart
             </button>

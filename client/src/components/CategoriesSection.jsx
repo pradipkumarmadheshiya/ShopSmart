@@ -15,7 +15,7 @@ function CategoriesSection() {
         {categories.map(category => (
           <div 
             key={category.id} 
-            className={`${category.color} rounded-lg p-4 text-center cursor-pointer hover:shadow-lg transition-shadow`}
+            className='rounded-lg p-4 text-center cursor-pointer hover:shadow-md hover:scale-110 transition-transform duration-500'
           >
             <div className="mb-2 flex justify-center">
               <img src={category.icon} alt={category.name} 

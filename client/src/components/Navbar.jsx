@@ -1,12 +1,11 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
 import {X, Menu, Search, User, ShoppingCart} from "lucide-react"
-import { assets } from '../assets/assets'
 
 const Navbar = () => {
 
   const {
-    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, showSearchSuggestions, setShowSearchSuggestions, searchSuggestions, setSearchSuggestions, currentPage, setCurrentPage, selectedProduct, setSelectedProduct, isLoggedIn, setIsLoggedIn, checkoutStage, setCheckoutStage, cartItems, setCartItems, categories, setCategories, currentCategory, setCurrentCategory, showLoginModal, setShowLoginModal
+    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, showSearchSuggestions, setShowSearchSuggestions, searchSuggestions, setSearchSuggestions, currentPage, setCurrentPage, selectedProduct, setSelectedProduct, checkoutStage, setCheckoutStage, cartItems, setCartItems, categories, setCategories, currentCategory, setCurrentCategory, navigate, showUserLoggedIn, setShowUserLoggedIn, user, setUser
   }=useAppContext()
 
   const navigateTo = (page) => {
@@ -26,12 +25,17 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  const logout=async ()=>{
+      setUser(null)
+      navigate("/")
+  }
+
   return (
     <nav className='sticky top-0 z-50 bg-white shadow-md'>
       <div className='container mx-auto px-4 py-3'>
         <div className='flex items-center justify-between'>
             <div className='flex gap-1 cursor-pointer mr-3'
-              onClick={()=>navigateTo("home")}>
+              onClick={()=>{navigate("/"); window.scrollTo(0,0)}}>
                 <img src="/logo.jpg" alt="logo" 
                 className='h-6 w-6 rounded'/>
                 <p>ShopSmart</p>
@@ -87,16 +91,17 @@ const Navbar = () => {
               {/* Right Navigation */}
               <div className='flex items-center space-x-4'>
                 <div className='hidden sm:block'>
-                  {isLoggedIn ? (
+                  {user ? (
                     <div className='relative group'>
-                      <button className="flex items-center justify-center hover:bg-gray-200 cursor-pointer p-2 rounded-full text-gray-700"
-                      onClick={()=>navigateTo("account")}>
-                        <User className='mr-1 '/>
-                      </button>
+                        <User className='w-10 cursor-pointer text-gray-700 hover:text-gray-900' />
+                        <ul className='hidden group-hover:block absolute top-6 right-0 bg-white shadow border border-gray-200 py-2.5 w-32 rounded-md text-sm z-40'>
+                            <li onClick={()=>navigate("/userOrders")} className='p-1.5 pl-3 hover:bg-gray-100 cursor-pointer'>My Orders</li>
+                            <li onClick={logout} className='p-1.5 pl-3 hover:bg-gray-100 cursor-pointer'>Logout</li>
+                        </ul>
                     </div>
                   ) : (
                     <button className='bg-gray-500 hover:bg-gray-600 text-white rounded-lg px-4 py-2 cursor-pointer'
-                      onClick={()=>setShowLoginModal(true)}>
+                      onClick={()=>setShowUserLoggedIn(true)}>
                         Login
                     </button>
                   )
@@ -119,7 +124,7 @@ const Navbar = () => {
               {
                 isMenuOpen && (
                   <div onClick={()=>setIsMenuOpen(false)}
-                  className='fixed inset-0 bg-gray-50 z-60 md:hidden'>
+                  className='fixed inset-0 bg-black/50 z-50 md:hidden'>
                     <div onClick={(e)=>e.stopPropagation()}
                     className='bg-white h-full w-4/5 max-w-xs overflow-y-auto'>
                       <div className='p-4 border-b flex items-center justify-between'>
@@ -133,11 +138,11 @@ const Navbar = () => {
 
                       <div className='p-2'>
                         {
-                          isLoggedIn ? (
+                          user ? (
                             <div 
                               className="p-3 flex items-center border-b border-gray-300 cursor-pointer hover:bg-gray-100"
                               onClick={() => {
-                                navigateTo('account');
+                                navigate('userAccount');
                                 setIsMenuOpen(false);
                               }}
                             >
@@ -148,7 +153,7 @@ const Navbar = () => {
                             <div 
                               className="p-3 flex items-center border-b border-gray-300 cursor-pointer hover:bg-gray-100"
                               onClick={() => {
-                                setShowLoginModal(true);
+                                setShowUserLoggedIn(true);
                                 setIsMenuOpen(false);
                               }}
                             >
