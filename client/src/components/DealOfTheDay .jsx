@@ -1,9 +1,11 @@
 import { Clock, ShoppingCart, Tag } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { assets } from '../assets/assets';
+import { useAppContext } from '../context/AppContext';
 
 function DealOfTheDay() {
 
+  const {addToCart}=useAppContext()
   const [timeLeft, setTimeLeft] = useState({
     hours: 8,
     minutes: 0,
@@ -87,7 +89,8 @@ function DealOfTheDay() {
               <span className="text-2xl font-bold">$199.99</span>
               <span className="text-lg text-gray-500 line-through ml-2">$249.99</span>
             </div>
-            <button className="bg-gray-900 hover:bg-black text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center cursor-pointer">
+            <button onClick={()=>addToCart()}
+            className="bg-gray-900 hover:bg-black text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center cursor-pointer">
               <ShoppingCart size={20} className="mr-2" />
               Add to Cart
             </button>

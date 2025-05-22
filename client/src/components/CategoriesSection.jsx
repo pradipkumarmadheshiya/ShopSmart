@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext';
 
 function CategoriesSection() {
 
-  const {categories}=useAppContext()
+  const {categories, navigate}=useAppContext()
 
   return (
     <section className="mb-12">
@@ -14,6 +14,10 @@ function CategoriesSection() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
         {categories.map(category => (
           <div 
+            onClick={()=>{
+                navigate(`/products/${category.url.toLocaleLowerCase()}`)
+                scrollTo(0,0)
+            }}
             key={category.id} 
             className='rounded-lg p-4 text-center cursor-pointer hover:shadow-md hover:scale-110 transition-transform duration-500'
           >

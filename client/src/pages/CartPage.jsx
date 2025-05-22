@@ -12,7 +12,7 @@ const CartPage = () => {
   // Calculate totals
   const calculateTotals = () => {
     const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const totalMRP = cartItems.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
+    const totalMRP = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const itemDiscount = totalMRP - subtotal;
     
     let promoDiscount = 0;
@@ -22,7 +22,7 @@ const CartPage = () => {
         : appliedPromo.value;
     }
     
-    const deliveryCharges = subtotal > 1000 ? 0 : 99;
+    const deliveryCharges = subtotal > 1000 ? 0 : 20;
     const finalTotal = subtotal - promoDiscount + deliveryCharges;
     
     return {
@@ -51,7 +51,7 @@ const CartPage = () => {
   const applyPromoCode = () => {
     const promoCodes = {
       'SAVE10': { type: 'percentage', value: 10, description: '10% off' },
-      'FLAT100': { type: 'flat', value: 100, description: '₹100 off' },
+      'FLAT100': { type: 'flat', value: 100, description: '$100 off' },
       'WELCOME20': { type: 'percentage', value: 20, description: '20% off' }
     };
     
@@ -125,8 +125,8 @@ const CartPage = () => {
                         <div>
                           <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xl font-bold text-gray-900">₹{item.price}</span>
-                            <span className="text-sm text-gray-500 line-through">₹{item.originalPrice}</span>
+                            <span className="text-xl font-bold text-gray-900">${item.price}</span>
+                            <span className="text-sm text-gray-500 line-through">${item.originalPrice}</span>
                             <span className="text-sm text-green-600 font-medium">
                               {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% off
                             </span>
@@ -218,25 +218,25 @@ const CartPage = () => {
               <div className="space-y-3">
                 <div className="flex justify-between text-gray-600">
                   <span>Total MRP</span>
-                  <span>₹{totals.totalMRP}</span>
+                  <span>${totals.totalMRP}</span>
                 </div>
                 
                 <div className="flex justify-between text-green-600">
                   <span>Item Discount</span>
-                  <span>-₹{totals.itemDiscount}</span>
+                  <span>-${totals.itemDiscount}</span>
                 </div>
                 
                 {totals.promoDiscount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Promo Discount</span>
-                    <span>-₹{totals.promoDiscount}</span>
+                    <span>-${totals.promoDiscount}</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between text-gray-600">
                   <span>Delivery Charges</span>
                   <span className={totals.deliveryCharges === 0 ? 'text-green-600' : ''}>
-                    {totals.deliveryCharges === 0 ? 'FREE' : `₹${totals.deliveryCharges}`}
+                    {totals.deliveryCharges === 0 ? 'FREE' : `$${totals.deliveryCharges}`}
                   </span>
                 </div>
                 
@@ -244,12 +244,12 @@ const CartPage = () => {
                 
                 <div className="flex justify-between text-lg font-semibold text-gray-800">
                   <span>Total Amount</span>
-                  <span>₹{totals.finalTotal}</span>
+                  <span>${totals.finalTotal}</span>
                 </div>
                 
                 {totals.itemDiscount + totals.promoDiscount > 0 && (
                   <div className="text-green-600 text-sm">
-                    You saved ₹{totals.itemDiscount + totals.promoDiscount} on this order!
+                    You saved ${totals.itemDiscount + totals.promoDiscount} on this order!
                   </div>
                 )}
               </div>
@@ -268,7 +268,7 @@ const CartPage = () => {
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <h4 className="font-semibold text-gray-800 mb-2">Delivery Information</h4>
                 <ul className="text-sm text-gray-700 space-y-1">
-                  <li>• Free delivery on orders above ₹1000</li>
+                  <li>• Free delivery on orders above $1000</li>
                   <li>• Express delivery available</li>
                   <li>• Easy 30-day returns</li>
                 </ul>

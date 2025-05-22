@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 function ProductListingPage() {
 
   const {
-        products, cartItems, setCartItems, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, category,
+        products, cartItems, setCartItems, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, category, searchQuery, setSearchQuery
     }=useAppContext()
 
   // Get all available filter options from products
@@ -40,6 +40,12 @@ function ProductListingPage() {
         ((p.originalPrice - p.price) / p.originalPrice) >= 0.2
       );
     }
+
+    if (searchQuery.length>0){
+      filtered=filtered.filter((p)=>(
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ))
+    }
     
     // Apply sorting
     switch (sortOption) {
@@ -58,7 +64,7 @@ function ProductListingPage() {
     }
     
     return filtered;
-  }, [products, filters, sortOption]);
+  }, [products, filters, sortOption, searchQuery]);
 
   // Handle filter changes
   const handleFilterChange = (filterType, value) => {
@@ -79,21 +85,6 @@ function ProductListingPage() {
       }
     });
   };
-
-  // Handle add to cart
-  // const addToCart = (product) => {
-  //   setCartItems(prev => {
-  //     const existingItem = prev.find(item => item.id === product.id);
-  //     if (existingItem) {
-  //       return prev.map(item => 
-  //         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-  //       );
-  //     } else {
-  //       return [...prev, { ...product, quantity: 1 }];
-  //     }
-  //   });
-  //   toast.success(`Added ${product.name} to cart!`);
-  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -176,7 +167,7 @@ function ProductListingPage() {
                         <input
                           type="radio"
                           id={`mobile-rating-${rating}`}
-                          name="rating"
+                          name="mobile-rating"
                           checked={filters.ratings === rating}
                           onChange={() => handleFilterChange('ratings', rating)}
                           className="mr-2"
@@ -254,7 +245,7 @@ function ProductListingPage() {
                     <input
                       type="radio"
                       id={`rating-${rating}`}
-                      name="rating"
+                      name="desktop-rating"
                       checked={filters.ratings === rating}
                       onChange={() => handleFilterChange('ratings', rating)}
                       className="mr-2"
@@ -315,12 +306,13 @@ function ProductListingPage() {
               <div className="bg-white p-8 rounded-lg shadow-sm text-center">
                 <p className="text-lg text-gray-600">No products match your selected filters.</p>
                 <button 
-                  onClick={() => setFilters({
+                  onClick={() => {setFilters({
                     priceRange: { min: 0, max: 2500 },
                     brands: [],
                     ratings: 0,
-                    discount: false
-                  })}
+                    discount: false,
+                  }); 
+                  setSearchQuery("")}}
                   className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 cursor-pointer"
                 >
                   Clear All Filters

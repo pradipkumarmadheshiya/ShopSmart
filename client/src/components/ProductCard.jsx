@@ -1,16 +1,15 @@
 import { ShoppingCart } from 'lucide-react'
-import React from 'react'
 import { useAppContext } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
 
-    const {navigate}=useAppContext()
+    const {navigate, quantity, setQuantity, cartItems, addToCart, removeFromCart}=useAppContext()
     
     return (
         <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-        onClick={()=>{navigate(`/products/${product.id}`); window.scrollTo(0, 0)}}>
+        onClick={()=>{navigate(`/products/${product.category.toLowerCase()}/${product.id}`); window.scrollTo(0, 0)}}>
             <div className='flex justify-center cursor-pointer'>
-                <img src={product.image} alt={product.name} className="w-fit h-48 object-cover rounded hover:scale-105 transition-transform duration-300" />
+                <img src={product.image} alt={product.name} className="w-40 sm:w-50 h-40 sm:h-50 object-cover rounded hover:scale-105 transition-transform duration-300" />
             </div>
             <div  onClick={(e)=>{e.stopPropagation()}}
             className="p-4">
@@ -34,9 +33,26 @@ const ProductCard = ({product}) => {
                     </span>
                     )}
                 </div>
-                <button className="bg-gray-600 text-white p-2 rounded-full hover:bg-gray-700 cursor-pointer">
-                    <ShoppingCart size={18} />
-                </button>
+
+                <div>
+                    {!cartItems[product.id] ? (
+                        <button className="flex items-center justify-center gap-1 bg-gray-100 border border-gray-400 md:w-[80px] w-[64px] h-[34px] rounded cursor-pointer text-gray-700" onClick={() => addToCart(product.id)} >
+                            <ShoppingCart/>
+                            Add
+                        </button>
+                    ) : (
+                        <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-gray-200 rounded select-none">
+                            <button onClick={() => {removeFromCart(product.id)}} className="cursor-pointer text-md px-2 h-full" >
+                                -
+                            </button>
+                            <span className="w-5 text-center">{cartItems[product.id]}</span>
+                            <button onClick={() => {addToCart(product.id)}} className="cursor-pointer text-md px-2 h-full" >
+                                +
+                            </button>
+                        </div>
+                    )}
+                </div>
+
                 </div>
             </div>
         </div>

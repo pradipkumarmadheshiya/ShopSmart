@@ -13,6 +13,7 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage'
 import { useAppContext } from './context/AppContext'
 import Login from './components/Login'
 import UserOrders from './pages/UserOrders'
+import ProductCategory from './pages/ProductCategory'
 
 const App = () => {
 
@@ -28,7 +29,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path='/products' element={<ProductListingPage/>}/>
-        <Route path='/products/:id' element={<ProductDetails/>}/>
+        <Route path='/products/:category/:id' element={<ProductDetails/>}/>
+        <Route path='/products/:category' element={<ProductCategory/>}/>
         <Route path='/cart' element={<CartPage/>}/>
         <Route path='/checkout' element={<CheckoutPage/>}/>
         <Route path='/orderConfirmation' element={<OrderConfirmationPage/>}/>

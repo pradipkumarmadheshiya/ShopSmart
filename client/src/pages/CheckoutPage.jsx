@@ -12,7 +12,7 @@ const CheckoutPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = 9.99;
+  const shipping = 20
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 

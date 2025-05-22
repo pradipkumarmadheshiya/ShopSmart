@@ -4,13 +4,9 @@ import { useAppContext } from '../context/AppContext';
 const CategoryNav = () => {
 
     const {
-        categories, setCategories, currentCategory, setCurrentCategory, currentPage, setCurrentPage
+        categories, navigate, setCategories, currentCategory, setCurrentCategory, currentPage, setCurrentPage
     }=useAppContext()
 
-    const handleCategoryClick = (categoryName) => {
-        setCurrentCategory(categoryName);
-        setCurrentPage('category');
-    };
 
   return (
     <div className='hidden md:block bg-gray-100 shadow-sm'>
@@ -20,8 +16,10 @@ const CategoryNav = () => {
                 categories.map((category)=>(
                 <div key={category.id} 
                 className='px-4 py-1 cursor-pointer hover:text-black text-gray-700 font-medium flex-shrink-0'
-                onClick={()=>handleCategoryClick(category.name)}>
-                    <span className='mr-1'>{category.icom}</span>
+                    onClick={()=>{
+                        navigate(`/products/${category.url.toLocaleLowerCase()}`)
+                        scrollTo(0,0)
+                    }}>
                     {category.name}
                 </div>
                 ))

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Star, Plus, Minus } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { useParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   
-  const {products, quantity, setQuantity, navigate, setShowUserLoggedIn, user}=useAppContext()
+  const {products, addToCart, quantity, setQuantity, navigate, setShowUserLoggedIn, user}=useAppContext()
 
   const {id}=useParams()
   const product=products.find((item)=>item.id==id)
@@ -149,7 +148,8 @@ const ProductDetails = () => {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <button className="w-full bg-gray-400 text-white py-3 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200 cursor-pointer">
+            <button onClick={()=>addToCart()}
+            className="w-full bg-gray-400 text-white py-3 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200 cursor-pointer">
               Add to Cart
             </button>
             <button onClick={handleBuyNow}

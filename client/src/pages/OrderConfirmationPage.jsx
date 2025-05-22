@@ -7,8 +7,9 @@ function OrderConfirmationPage() {
 
   const latestOrderIdx=userOrders.length-1
 
-  const subtotal = userOrders[latestOrderIdx].products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+  let subtotal = userOrders[latestOrderIdx].products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
   const tax = subtotal * 0.08; // 8% tax
+  const total=subtotal+tax+userOrders[latestOrderIdx].shipping.cost
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -105,7 +106,7 @@ function OrderConfirmationPage() {
                 </div>
                 <div className="flex justify-between text-lg font-semibold border-t pt-4">
                   <span className="text-gray-900">Total</span>
-                  <span className="text-gray-900">${userOrders[latestOrderIdx].total.toFixed(2)}</span>
+                  <span className="text-gray-900">{total.toFixed(2)}</span>
                 </div>
               </div>
             </div>

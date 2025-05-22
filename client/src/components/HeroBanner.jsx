@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { banners } from '../constants';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useAppContext } from '../context/AppContext';
 
 const HeroBanner = () => {
+
+    const {navigate}=useAppContext()
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -36,7 +39,8 @@ const HeroBanner = () => {
                     <div className="md:w-1/2 space-y-4 text-center md:text-left mb-6 md:mb-0">
                         <h1 className={`text-4xl font-bold ${banner.textColor}`}>{banner.title}</h1>
                         <p className="text-lg">{banner.description}</p>
-                        <button className={`${banner.btnColor} text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity cursor-pointer`}>
+                        <button onClick={()=>{navigate("/products"); window.scrollTo(0,0)}}
+                        className={`${banner.btnColor} text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity cursor-pointer`}>
                         Shop Now
                         </button>
                     </div>

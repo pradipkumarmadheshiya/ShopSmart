@@ -86,7 +86,7 @@ const productsList=[
         originalPrice: 129.99,
         rating: 3.9,
         reviewCount: 201,
-        category: 'Home & Kitchen',
+        category: 'Home-Kitchen',
         brand: 'KitchenPro',
         image: assets.cookware,
         images: [
@@ -218,7 +218,7 @@ const productsList=[
         originalPrice: 299.99,
         rating: 4.4,
         reviewCount: 310,
-        category: 'Toys',
+        category: 'Toys-Games',
         brand: 'Toyz',
         image: assets.sliding_toy,
         images: [
@@ -307,14 +307,14 @@ const productsList=[
 ]
 
 const categoriesList=[
-  { id: 1, name: 'Electronics', icon: assets.laptop, url: '/category/electronics' },
-  { id: 2, name: 'Fashion', icon: assets.tshirt, url: '/category/fashion' },
-  { id: 3, name: 'Home & Kitchen', icon: assets.home_kitchen, url: '/category/home-kitchen' },
-  { id: 4, name: 'Beauty', icon: assets.lipstick, url: '/category/beauty' },
-  { id: 5, name: 'Toys & Games', icon: assets.toys, url: '/category/toys-games' },
-  { id: 6, name: 'Sports', icon: assets.football, url: '/category/sports' },
-  { id: 7, name: 'Books', icon: assets.books, url: '/category/books' },
-  { id: 8, name: 'Grocery', icon: assets.grocery, url: '/category/grocery' }
+  { id: 1, name: 'Electronics', icon: assets.laptop, url: 'electronics' },
+  { id: 2, name: 'Fashion', icon: assets.tshirt, url: 'fashion' },
+  { id: 3, name: 'Home & Kitchen', icon: assets.home_kitchen, url: 'home-kitchen' },
+  { id: 4, name: 'Beauty', icon: assets.lipstick, url: 'beauty' },
+  { id: 5, name: 'Toys & Games', icon: assets.toys, url: 'toys-games' },
+  { id: 6, name: 'Sports', icon: assets.football, url: 'sports' },
+  { id: 7, name: 'Books', icon: assets.books, url: 'books' },
+  { id: 8, name: 'Grocery', icon: assets.grocery, url: 'grocery' }
 ]
 
 const banners = [
@@ -352,7 +352,7 @@ const userAllOrders=[{
   orderDate: "May 19, 2025",
   status: 'Delivered',
   estimatedDelivery: "May 24, 2025",
-  total: 209.99,
+  total: 220.99,
   products: [
     {
       id: 1,
@@ -364,25 +364,25 @@ const userAllOrders=[{
   ],
   shipping: {
     method: "Standard Shipping",
-    cost: 9.99
+    cost: 20
   },
   shippingAddress: {
-    name: "John Doe",
+    name: "Test",
     street: "123 Main Street",
     apartment: "Apt 4B",
-    city: "New York",
-    state: "NY",
+    city: "City",
+    state: "DL",
     zipCode: "10001",
-    country: "United States"
+    country: "India"
   },
   billingAddress: {
-    name: "John Doe",
+    name: "Test",
     street: "123 Main Street",
     apartment: "Apt 4B",
-    city: "New York",
-    state: "NY",
+    city: "City",
+    state: "DL",
     zipCode: "10001",
-    country: "United States"
+    country: "India"
   },
 }]
 
