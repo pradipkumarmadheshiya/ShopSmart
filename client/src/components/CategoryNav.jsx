@@ -3,10 +3,7 @@ import { useAppContext } from '../context/AppContext';
 
 const CategoryNav = () => {
 
-    const {
-        categories, navigate, setCategories, currentCategory, setCurrentCategory, currentPage, setCurrentPage
-    }=useAppContext()
-
+    const {categories, navigate}=useAppContext()
 
   return (
     <div className='hidden md:block bg-gray-100 shadow-sm'>

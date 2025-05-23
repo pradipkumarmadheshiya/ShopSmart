@@ -5,7 +5,7 @@ import {X, Menu, Search, User, ShoppingCart} from "lucide-react"
 const Navbar = () => {
 
   const {
-    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, currentPage, setCurrentPage, selectedProduct, setSelectedProduct, checkoutStage, setCheckoutStage, cartItems, setCartItems, categories, setCategories, currentCategory, setCurrentCategory, navigate, showUserLoggedIn, setShowUserLoggedIn, user, setUser
+    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, cartItems, categories, navigate, setShowUserLoggedIn, user, setUser
   }=useAppContext()
 
   useEffect(()=>{

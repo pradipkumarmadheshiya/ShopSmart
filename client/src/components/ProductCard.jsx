@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext'
 
 const ProductCard = ({product}) => {
 
-    const {navigate, quantity, setQuantity, cartItems, addToCart, removeFromCart}=useAppContext()
+    const {navigate, cartItems, addToCart, removeFromCart}=useAppContext()
     
     return (
         <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"

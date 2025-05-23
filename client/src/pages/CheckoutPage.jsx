@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreditCard, Smartphone, Truck, ShoppingCart, User, MapPin, Phone, Mail } from 'lucide-react';
+import { Truck, ShoppingCart, User, MapPin, Phone, Mail } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
