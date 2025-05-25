@@ -3,13 +3,30 @@ import { useAppContext } from '../context/AppContext';
 
 function OrderConfirmationPage() {
 
-  const {userOrders, navigate}=useAppContext()
+  const {userOrders, setUserOrders, navigate, cartArray}=useAppContext()
 
   const latestOrderIdx=userOrders.length-1
 
-  let subtotal = userOrders[latestOrderIdx].products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+  let subtotal = userOrders[latestOrderIdx]?.products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
   const tax = subtotal * 0.08; // 8% tax
-  const total=subtotal+tax+userOrders[latestOrderIdx].shipping.cost
+  const total=subtotal+tax+userOrders[latestOrderIdx]?.shipping.cost
+
+  cartArray.forEach((item)=>{
+    let tempItem={}
+    tempItem.orderId=11111
+    tempItem.orderDate=new Date().toLocaleDateString()
+    tempItem.status="On the way"
+    tempItem.estimatedDelivery=Number(new Date().getDate())+3
+    tempItem.total=total
+    tempItem.products={
+      id:item.id,
+      name:item.name,
+      price:item.price,
+      quantity:item.quantity,
+      image:item.image
+    }
+
+  })
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -25,7 +42,7 @@ function OrderConfirmationPage() {
               Thank you for your purchase. Your order has been successfully placed.
             </p>
             <div className="text-lg font-semibold text-gray-900">
-              Order ID: <span className="text-gray-600">{userOrders[latestOrderIdx].orderId}</span>
+              Order ID: <span className="text-gray-600">{userOrders[latestOrderIdx]?.orderId}</span>
             </div>
           </div>
         </div>
@@ -39,7 +56,7 @@ function OrderConfirmationPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Order Placed</h3>
-                <p className="text-sm text-gray-600">{userOrders[latestOrderIdx].orderDate}</p>
+                <p className="text-sm text-gray-600">{userOrders[latestOrderIdx]?.orderDate}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -48,7 +65,7 @@ function OrderConfirmationPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900">Estimated Delivery</h3>
-                <p className="text-sm text-gray-600">{userOrders[latestOrderIdx].estimatedDelivery}</p>
+                <p className="text-sm text-gray-600">{userOrders[latestOrderIdx]?.estimatedDelivery}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
@@ -69,7 +86,7 @@ function OrderConfirmationPage() {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
               <div className="space-y-4">
-                {userOrders[latestOrderIdx].products.map((product) => (
+                {userOrders[latestOrderIdx]?.products.map((product) => (
                   <div key={product.id} className="flex items-center space-x-4 border-b border-gray-400 pb-4">
                     <img
                       src={product.image}
@@ -94,11 +111,11 @@ function OrderConfirmationPage() {
               <div className="mt-6 pt-4">
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="text-gray-900">${subtotal.toFixed(2)}</span>
+                  <span className="text-gray-900">${subtotal?.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-600">{userOrders[latestOrderIdx].shipping.method}</span>
-                  <span className="text-gray-900">${userOrders[latestOrderIdx].shipping.cost.toFixed(2)}</span>
+                  <span className="text-gray-600">{userOrders[latestOrderIdx]?.shipping.method}</span>
+                  <span className="text-gray-900">${userOrders[latestOrderIdx]?.shipping.cost.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm mb-4">
                   <span className="text-gray-600">Tax</span>
@@ -121,15 +138,15 @@ function OrderConfirmationPage() {
                 Shipping Address
               </h2>
               <div className="text-gray-700">
-                <p className="font-medium">{userOrders[latestOrderIdx].shippingAddress.name}</p>
-                <p>{userOrders[latestOrderIdx].shippingAddress.street}</p>
-                {userOrders[latestOrderIdx].shippingAddress.apartment && (
-                  <p>{userOrders[latestOrderIdx].shippingAddress.apartment}</p>
+                <p className="font-medium">{userOrders[latestOrderIdx]?.shippingAddress.name}</p>
+                <p>{userOrders[latestOrderIdx]?.shippingAddress.street}</p>
+                {userOrders[latestOrderIdx]?.shippingAddress.apartment && (
+                  <p>{userOrders[latestOrderIdx]?.shippingAddress.apartment}</p>
                 )}
                 <p>
-                  {userOrders[latestOrderIdx].shippingAddress.city}, {userOrders[latestOrderIdx].shippingAddress.state} {userOrders[latestOrderIdx].shippingAddress.zipCode}
+                  {userOrders[latestOrderIdx]?.shippingAddress.city}, {userOrders[latestOrderIdx]?.shippingAddress.state} {userOrders[latestOrderIdx]?.shippingAddress.zipCode}
                 </p>
-                <p>{userOrders[latestOrderIdx].shippingAddress.country}</p>
+                <p>{userOrders[latestOrderIdx]?.shippingAddress.country}</p>
               </div>
             </div>
 

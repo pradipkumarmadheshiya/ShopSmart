@@ -347,43 +347,4 @@ const banners = [
   }
 ];
 
-const userAllOrders=[{
-  orderId: "ORD-24156789",
-  orderDate: "May 19, 2025",
-  status: 'Delivered',
-  estimatedDelivery: "May 24, 2025",
-  total: 220.99,
-  products: [
-    {
-      id: 1,
-      name: "Wireless Bluetooth Headphones",
-      price: 199.99,
-      quantity: 1,
-      image: assets.headphone
-    }
-  ],
-  shipping: {
-    method: "Standard Shipping",
-    cost: 20
-  },
-  shippingAddress: {
-    name: "Test",
-    street: "123 Main Street",
-    apartment: "Apt 4B",
-    city: "City",
-    state: "DL",
-    zipCode: "10001",
-    country: "India"
-  },
-  billingAddress: {
-    name: "Test",
-    street: "123 Main Street",
-    apartment: "Apt 4B",
-    city: "City",
-    state: "DL",
-    zipCode: "10001",
-    country: "India"
-  },
-}]
-
-export {productsList, categoriesList, banners, userAllOrders}
+export {productsList, categoriesList, banners}

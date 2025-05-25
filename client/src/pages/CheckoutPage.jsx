@@ -5,13 +5,13 @@ import toast from 'react-hot-toast';
 
 const CheckoutPage = () => {
   
-  const {addressFormData, setAddressFormData, cartItems, navigate}
+  const {addressFormData, setAddressFormData, cartArray, navigate}
   =useAppContext()
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotal = cartArray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shipping = 20
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
@@ -327,7 +327,7 @@ const CheckoutPage = () => {
 
               {/* Cart Items */}
               <div className="space-y-4 mb-6">
-                {cartItems.map((item) => (
+                {cartArray.map((item) => (
                   <div key={item.id} className="flex items-center space-x-3">
                     <img
                       src={item.image}

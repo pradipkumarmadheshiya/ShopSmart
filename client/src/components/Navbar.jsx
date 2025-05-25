@@ -5,7 +5,7 @@ import {X, Menu, Search, User, ShoppingCart} from "lucide-react"
 const Navbar = () => {
 
   const {
-    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, cartItems, categories, navigate, setShowUserLoggedIn, user, setUser
+    isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, cartItems, categories, navigate, setShowUserLoggedIn, getCartCount, user, setUser
   }=useAppContext()
 
   useEffect(()=>{
@@ -60,9 +60,9 @@ const Navbar = () => {
                 onClick={()=> {navigate("/cart"); window.scrollTo(0,0)}}>
                   <ShoppingCart />
                   {
-                    cartItems.length > 0 && (
+                    (
                       <span className='absolute -top-2 -right-2 bg-gray-700 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center'>
-                        {cartItems.length}
+                        {getCartCount()}
                       </span>
                     )
                   }

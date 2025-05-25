@@ -4,15 +4,15 @@ import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
 const CartPage = () => {
-  const {cartItems, setCartItems, navigate, user, setShowUserLoggedIn} = useAppContext()
+  const {products, cartItems, cartArray, setCartArray, addToCart, removeFromCart, navigate, user, setShowUserLoggedIn} = useAppContext()
 
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState(null);
 
   // Calculate totals
   const calculateTotals = () => {
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const totalMRP = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = cartArray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const totalMRP = cartArray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const itemDiscount = totalMRP - subtotal;
     
     let promoDiscount = 0;
@@ -37,15 +37,11 @@ const CartPage = () => {
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity < 1) return;
-    setCartItems(items => 
+    setCartArray(items => 
       items.map(item => 
         item.id === id ? { ...item, quantity: newQuantity } : item
       )
     );
-  };
-
-  const removeItem = (id) => {
-    setCartItems(items => items.filter(item => item.id !== id));
   };
 
   const applyPromoCode = () => {
@@ -76,7 +72,7 @@ const CartPage = () => {
     window.scrollTo(0, 0);
   };
 
-  if (cartItems.length === 0) {
+  if (cartArray.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4">
@@ -100,15 +96,15 @@ const CartPage = () => {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Shopping Cart</h1>
-          <p className="text-gray-600 mt-2"><span className='text-black'>{cartItems.length}</span> items in your cart</p>
+          <p className="text-gray-600 mt-2"><span className='text-black'>{cartArray.length}</span> items in your cart</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm">
-              {cartItems.map((item, index) => (
-                <div key={item.id} className={`p-6 ${index !== cartItems.length - 1 ? 'border-b border-gray-200' : ''}`}>
+              {cartArray.map((item, index) => (
+                <div key={item.id} className={`p-6 ${index !== cartArray.length - 1 ? 'border-b border-gray-200' : ''}`}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     {/* Product Image */}
                     <div className="flex-shrink-0">
@@ -131,7 +127,7 @@ const CartPage = () => {
                               {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% off
                             </span>
                           </div>
-                          {!item.inStock && (
+                          {!item.availability && (
                             <span className="inline-block mt-2 px-2 py-1 bg-red-100 text-red-600 text-xs rounded">
                               Out of Stock
                             </span>
@@ -145,7 +141,9 @@ const CartPage = () => {
                           <span className="text-sm text-gray-600">Qty:</span>
                           <div className="flex items-center border border-gray-00 rounded ">
                             <button 
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={() => {updateQuantity(item.id, item.quantity - 1);
+                                toast.error("removed 1 item from cart")
+                              }}
                               className="p-1 hover:bg-gray-100 transition-colors"
                               disabled={item.quantity <= 1}
                             >
@@ -155,7 +153,9 @@ const CartPage = () => {
                               {item.quantity}
                             </span>
                             <button 
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={() => {updateQuantity(item.id, item.quantity + 1);
+                                toast.success("1 more item added to cart")
+                              }}
                               className="p-1 hover:bg-gray-100 transition-colors"
                             >
                               <Plus className="w-4 h-4" />
@@ -165,7 +165,7 @@ const CartPage = () => {
 
                         <div>
                           <button 
-                            onClick={() => removeItem(item.id)}
+                            onClick={() => removeFromCart(item.id)}
                             className="flex items-center gap-1 text-red-500 hover:text-red-700 text-sm transition-colors cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />

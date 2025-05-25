@@ -7,7 +7,7 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   
-  const {products, addToCart, quantity, setQuantity, navigate, setShowUserLoggedIn, user}=useAppContext()
+  const {products, addToCart, removeFromCart, quantity, setQuantity, navigate, setShowUserLoggedIn, user}=useAppContext()
 
   const {id}=useParams()
   const product=products.find((item)=>item.id==id)
@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const handleQuantityChange = (action) => {
     if (action === 'increment') {
       setQuantity(prev => prev + 1);
-    } else if (action === 'decrement' && quantity > 1) {
+    } else if (action === 'decrement' && quantity > 0) {
       setQuantity(prev => prev - 1);
     }
   };
@@ -128,9 +128,11 @@ const ProductDetails = () => {
             <h3 className="text-lg font-semibold mb-3">Quantity</h3>
             <div className="flex items-center space-x-3">
               <button
-                onClick={() => handleQuantityChange('decrement')}
+                onClick={() => {handleQuantityChange('decrement');
+                  removeFromCart(product.id)
+                }}
                 className="p-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                disabled={quantity === 1}
+                disabled={quantity === 0}
               >
                 <Minus className="w-4 h-4" />
               </button>
@@ -138,7 +140,9 @@ const ProductDetails = () => {
                 {quantity}
               </span>
               <button
-                onClick={() => handleQuantityChange('increment')}
+                onClick={() => {handleQuantityChange('increment');
+                  addToCart(product.id)
+                }}
                 className="p-2 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 <Plus className="w-4 h-4" />
@@ -148,7 +152,7 @@ const ProductDetails = () => {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <button onClick={()=>addToCart()}
+            <button onClick={()=>{addToCart(); handleQuantityChange('increment')}}
             className="w-full bg-gray-400 text-white py-3 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200 cursor-pointer">
               Add to Cart
             </button>
