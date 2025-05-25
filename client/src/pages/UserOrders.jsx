@@ -61,6 +61,10 @@ const UserOrders = () => {
       </div>
     );
 
+    if(userOrders.length===0){
+      return <p className='p-20 text-red-500 text-center'>No any orders yet</p>
+    }
+
     return (
       <div onClick={()=>setSelectedOrder(null)}
       className="bg-white rounded-lg shadow-sm p-6">

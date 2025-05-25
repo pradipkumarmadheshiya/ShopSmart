@@ -25,6 +25,19 @@ export const AppContextProvider=({children})=>{
   const [quantity, setQuantity] = useState(0);
   const [cartArray, setCartArray]=useState([])
   const navigate=useNavigate()
+  const [addressFormData2, setAddressFormData2]=useState(
+    {
+      name: '',
+      phone: '',
+      email: '',
+      addressLine1: '',
+      addressLine2: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      paymentMethod: 'cod'
+    }
+  )
 
   const getCart=()=>{
       let tempArray=[]
@@ -97,7 +110,7 @@ export const AppContextProvider=({children})=>{
   }
 
   const value={
-      isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, selectedProduct, setSelectedProduct, currentPage, setCurrentPage, showUserLoggedIn, setShowUserLoggedIn, checkoutStage, setCheckoutStage, cartItems, setCartItems, categories, setCategories, products, setProducts, userOrders, setUserOrders, currentCategory, setCurrentCategory, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, navigate, quantity, setQuantity, addressFormData, setAddressFormData, isLoading, setIsLoading, user, setUser, addToCart, removeFromCart, getCartCount, cartArray, setCartArray
+      isMenuOpen, setIsMenuOpen, searchQuery, setSearchQuery, selectedProduct, setSelectedProduct, currentPage, setCurrentPage, showUserLoggedIn, setShowUserLoggedIn, checkoutStage, setCheckoutStage, cartItems, setCartItems, categories, setCategories, products, setProducts, userOrders, setUserOrders, currentCategory, setCurrentCategory, sortOption, setSortOption, mobileFiltersOpen, setMobileFiltersOpen, filters, setFilters, navigate, quantity, setQuantity, addressFormData, setAddressFormData, isLoading, setIsLoading, user, setUser, addToCart, removeFromCart, getCartCount, cartArray, setCartArray, addressFormData2, setAddressFormData2
   }
   return (
     <AppContext.Provider value={value}>

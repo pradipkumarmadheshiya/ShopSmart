@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 const CheckoutPage = () => {
   
-  const {addressFormData, setAddressFormData, cartArray, navigate}
+  const {addressFormData, setAddressFormData, addressFormData2, setAddressFormData2, cartArray, navigate}
   =useAppContext()
 
   const [errors, setErrors] = useState({});
@@ -90,6 +90,7 @@ const CheckoutPage = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
       toast.success(`Order placed successfully! Payment method: ${addressFormData.paymentMethod === 'cod' ? 'Cash on Delivery' : addressFormData.paymentMethod === 'card' ? 'Credit/Debit Card' : 'UPI'}`);
       
+      setAddressFormData2({...addressFormData2, ...addressFormData})
       // Reset form
       setAddressFormData({
         name: '',
@@ -104,6 +105,7 @@ const CheckoutPage = () => {
       });
     } catch (error) {
       toast.error('Something went wrong. Please try again.');
+      console.log("error is:", error)
     } finally {
       setIsSubmitting(false);
     }
@@ -182,7 +184,7 @@ const CheckoutPage = () => {
                       className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500 ${
                         errors.email ? 'border-red-300' : 'border-gray-300'
                       }`}
-                      placeholder="your.email@example.com"
+                      placeholder="your.email@abc.com"
                     />
                     {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
                   </div>
@@ -244,7 +246,7 @@ const CheckoutPage = () => {
                         className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500 ${
                           errors.city ? 'border-red-300' : 'border-gray-300'
                         }`}
-                        placeholder="New York"
+                        placeholder="New Delhi"
                       />
                       {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
                     </div>
@@ -262,7 +264,7 @@ const CheckoutPage = () => {
                         className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500 ${
                           errors.state ? 'border-red-300' : 'border-gray-300'
                         }`}
-                        placeholder="NY"
+                        placeholder="DL"
                       />
                       {errors.state && <p className="mt-1 text-sm text-red-600">{errors.state}</p>}
                     </div>
