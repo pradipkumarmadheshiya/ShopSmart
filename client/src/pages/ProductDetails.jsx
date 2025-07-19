@@ -152,7 +152,7 @@ const ProductDetails = () => {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <button onClick={()=>{addToCart(); handleQuantityChange('increment')}}
+            <button onClick={()=>{addToCart(product.id); handleQuantityChange('increment')}}
             className="w-full bg-gray-400 text-white py-3 rounded-lg font-semibold hover:bg-gray-500 transition-colors duration-200 cursor-pointer">
               Add to Cart
             </button>

@@ -35,14 +35,14 @@ const CartPage = () => {
     };
   };
 
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) return;
-    setCartArray(items => 
-      items.map(item => 
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
+  // const updateQuantity = (id, newQuantity) => {
+  //   if (newQuantity < 1) return;
+  //   setCartArray(items => 
+  //     items.map(item => 
+  //       item.id === id ? { ...item, quantity: newQuantity } : item
+  //     )
+  //   );
+  // };
 
   const applyPromoCode = () => {
     const promoCodes = {
@@ -124,7 +124,7 @@ const CartPage = () => {
                             <span className="text-xl font-bold text-gray-900">${item.price}</span>
                             <span className="text-sm text-gray-500 line-through">${item.originalPrice}</span>
                             <span className="text-sm text-green-600 font-medium">
-                              {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% off
+                              {(((item.originalPrice - item.price) / item.originalPrice) * 100).toFixed(2)}% off
                             </span>
                           </div>
                           {!item.availability && (
@@ -141,11 +141,10 @@ const CartPage = () => {
                           <span className="text-sm text-gray-600">Qty:</span>
                           <div className="flex items-center border border-gray-00 rounded ">
                             <button 
-                              onClick={() => {updateQuantity(item.id, item.quantity - 1);
+                              onClick={() => {removeFromCart(item.id);
                                 toast.error("removed 1 item from cart")
                               }}
                               className="p-1 hover:bg-gray-100 transition-colors"
-                              disabled={item.quantity <= 1}
                             >
                               <Minus className="w-4 h-4" />
                             </button>
@@ -153,7 +152,7 @@ const CartPage = () => {
                               {item.quantity}
                             </span>
                             <button 
-                              onClick={() => {updateQuantity(item.id, item.quantity + 1);
+                              onClick={() => {addToCart(item.id);
                                 toast.success("1 more item added to cart")
                               }}
                               className="p-1 hover:bg-gray-100 transition-colors"
@@ -218,7 +217,7 @@ const CartPage = () => {
               <div className="space-y-3">
                 <div className="flex justify-between text-gray-600">
                   <span>Total MRP</span>
-                  <span>${totals.totalMRP}</span>
+                  <span>${(totals.totalMRP).toFixed(2)}</span>
                 </div>
                 
                 <div className="flex justify-between text-green-600">
@@ -229,7 +228,7 @@ const CartPage = () => {
                 {totals.promoDiscount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Promo Discount</span>
-                    <span>-${totals.promoDiscount}</span>
+                    <span>-${(totals.promoDiscount).toFixed(2)}</span>
                   </div>
                 )}
                 
@@ -244,12 +243,12 @@ const CartPage = () => {
                 
                 <div className="flex justify-between text-lg font-semibold text-gray-800">
                   <span>Total Amount</span>
-                  <span>${totals.finalTotal}</span>
+                  <span>${(totals.finalTotal).toFixed(2)}</span>
                 </div>
                 
                 {totals.itemDiscount + totals.promoDiscount > 0 && (
                   <div className="text-green-600 text-sm">
-                    You saved ${totals.itemDiscount + totals.promoDiscount} on this order!
+                    You saved ${(totals.itemDiscount + totals.promoDiscount).toFixed(2)} on this order!
                   </div>
                 )}
               </div>
