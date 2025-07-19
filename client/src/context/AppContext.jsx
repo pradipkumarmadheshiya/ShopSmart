@@ -23,7 +23,6 @@ export const AppContextProvider = ({ children }) => {
   const [currentCategory, setCurrentCategory] = useState(null);
   const [sortOption, setSortOption] = useState("featured");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [quantity, setQuantity] = useState(0);
   const [cartArray, setCartArray] = useState([]);
   const navigate = useNavigate();
   const [addressFormData2, setAddressFormData2] = useState({
@@ -139,8 +138,6 @@ export const AppContextProvider = ({ children }) => {
     filters,
     setFilters,
     navigate,
-    quantity,
-    setQuantity,
     addressFormData,
     setAddressFormData,
     isLoading,

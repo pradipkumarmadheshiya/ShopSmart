@@ -35,15 +35,6 @@ const CartPage = () => {
     };
   };
 
-  // const updateQuantity = (id, newQuantity) => {
-  //   if (newQuantity < 1) return;
-  //   setCartArray(items => 
-  //     items.map(item => 
-  //       item.id === id ? { ...item, quantity: newQuantity } : item
-  //     )
-  //   );
-  // };
-
   const applyPromoCode = () => {
     const promoCodes = {
       'SAVE10': { type: 'percentage', value: 10, description: '10% off' },

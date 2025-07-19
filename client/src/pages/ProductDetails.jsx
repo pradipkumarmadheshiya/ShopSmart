@@ -7,18 +7,10 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   
-  const {products, addToCart, removeFromCart, quantity, setQuantity, navigate, setShowUserLoggedIn, user}=useAppContext()
+  const {products, addToCart, removeFromCart, navigate, setShowUserLoggedIn, user}=useAppContext()
 
   const {id}=useParams()
   const product=products.find((item)=>item.id==id)
-
-  const handleQuantityChange = (action) => {
-    if (action === 'increment') {
-      setQuantity(prev => prev + 1);
-    } else if (action === 'decrement' && quantity > 0) {
-      setQuantity(prev => prev - 1);
-    }
-  };
 
   const handleBuyNow = () => {
     if (!user) {
@@ -128,21 +120,18 @@ const ProductDetails = () => {
             <h3 className="text-lg font-semibold mb-3">Quantity</h3>
             <div className="flex items-center space-x-3">
               <button
-                onClick={() => {handleQuantityChange('decrement');
-                  removeFromCart(product.id)
-                }}
+                onClick={() => removeFromCart(product.id)
+                }
                 className="p-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                disabled={quantity === 0}
               >
                 <Minus className="w-4 h-4" />
               </button>
               <span className="px-4 py-2 border border-gray-300 rounded-md min-w-16 text-center">
-                {quantity}
+                {(JSON.parse(localStorage.getItem("localStorageCartItems")))[product.id] || 0}
               </span>
               <button
-                onClick={() => {handleQuantityChange('increment');
-                  addToCart(product.id)
-                }}
+                onClick={() =>addToCart(product.id)
+                }
                 className="p-2 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 <Plus className="w-4 h-4" />
