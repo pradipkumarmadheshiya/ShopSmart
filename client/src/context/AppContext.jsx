@@ -15,7 +15,7 @@ export const AppContextProvider=({children})=>{
   const [currentPage, setCurrentPage]=useState("login")
   const [showUserLoggedIn, setShowUserLoggedIn]=useState(false)
   const [checkoutStage, setCheckoutStage]=useState("cart")
-  const [cartItems, setCartItems]=useState({})
+  const [cartItems, setCartItems]=useState(JSON.parse(localStorage.getItem("localStorageCartItems")) || {})
   const [products, setProducts] = useState(productsList)
   const [categories, setCategories] = useState(categoriesList)
   const [userOrders, setUserOrders]=useState([])
@@ -86,6 +86,7 @@ export const AppContextProvider=({children})=>{
       }
 
       setCartItems(cartData)
+      localStorage.setItem("localStorageCartItems", JSON.stringify(cartData))
       toast.success("Added to Cart")
   }
 
